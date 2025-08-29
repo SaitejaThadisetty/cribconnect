@@ -10,9 +10,13 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
-            UCM CribConnect
-          </h1>
+          <Link href="/" passHref>
+            <Button variant="ghost" className="p-0 h-auto hover:bg-transparent cursor-pointer">
+              <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
+              UCM CribConnect
+              </h1>
+            </Button>
+            </Link>
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/listings" className="text-gray-600 hover:text-[#A60000]">Listings</Link>
             <Link href="/roommates" className="text-gray-600 hover:text-[#A60000]">Roommates</Link>

@@ -1,3 +1,6 @@
+html, body {
+  overflow-x: hidden;
+}
 @import "tailwindcss";
 
 :root {
@@ -7,10 +10,11 @@
   --ucm-gray: #CCCCCC;
 }
 
+
 @theme {
   --color-background: var(--ucm-white);
   --color-foreground: var(--ucm-black);
-  --font-sans: "Merriweather", serif;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {

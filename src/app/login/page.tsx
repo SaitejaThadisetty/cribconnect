@@ -54,7 +54,12 @@ export default function LoginPage() {
             <span className="px-2 bg-white text-gray-500">Or continue with</span>
           </div>
         </div>
-  <Button variant="outline" className="w-full cursor-pointer" type="button" onClick={() => signIn("google", { callbackUrl: "/listings" })}>Sign in with Google</Button>
+        <Button variant="outline" className="w-full cursor-pointer" type="button" onClick={() => signIn("google", { callbackUrl: "/listings" })}>Sign in with Google</Button>
+
+        <div className="text-center pt-4 text-sm text-gray-600">
+          Don't have an account?{' '}
+          <a href="/signup" className="text-[#A60000] font-semibold hover:underline">Sign up now</a>
+        </div>
       </div>
     </div>
   );
