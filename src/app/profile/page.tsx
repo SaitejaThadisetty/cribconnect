@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSession, signOut } from "next-auth/react";
 import { Avatar } from "@/components/ui/avatar";
+import { Link } from "lucide-react";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -13,11 +14,22 @@ export default function ProfilePage() {
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
-            UCM CribConnect
-          </h1>
+          <div className="flex items-center space-x-8">
+            <a href="/">
+              <Button variant="ghost" className="p-0 h-auto hover:bg-transparent cursor-pointer">
+                <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
+                  UCM CribConnect
+                </h1>
+              </Button>
+            </a>
+            <div className="hidden md:flex items-center space-x-6 ml-4">
+              <a href="/listings" className="text-base font-medium text-gray-700 hover:text-[#A60000]">Listings</a>
+              <a href="/roommates" className="text-base font-medium text-gray-700 hover:text-[#A60000]">Roommates</a>
+              <a href="/about" className="text-base font-medium text-gray-700 hover:text-[#A60000]">About</a>
+            </div>
+          </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" onClick={() => signOut({ callbackUrl: "/login" })}>Logout</Button>
+            <Button variant="outline" onClick={() => signOut({ callbackUrl: "/login" })} className="cursor-pointer">Logout</Button>
           </div>
         </nav>
       </header>

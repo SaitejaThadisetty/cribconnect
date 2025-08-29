@@ -11,17 +11,25 @@ import Link from "next/link";
 
 export default function ListingsPage() {
   const { data: session } = useSession();
+  // No redirect logic here; redirect should be handled in login/signup pages
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="flex items-center space-x-8">
             <Link href="/" passHref>
-            <Button variant="ghost" className="p-0 h-auto hover:bg-transparent cursor-pointer">
-              <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
-              UCM CribConnect
-              </h1>
-            </Button>
+              <Button variant="ghost" className="p-0 h-auto hover:bg-transparent cursor-pointer">
+                <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
+                  UCM CribConnect
+                </h1>
+              </Button>
             </Link>
+            <div className="hidden md:flex items-center space-x-6 ml-4">
+              <Link href="/listings" className="text-base font-medium text-gray-700 hover:text-[#A60000]">Listings</Link>
+              <Link href="/roommates" className="text-base font-medium text-gray-700 hover:text-[#A60000]">Roommates</Link>
+              <Link href="/about" className="text-base font-medium text-gray-700 hover:text-[#A60000]">About</Link>
+            </div>
+          </div>
           {session ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -31,12 +39,19 @@ export default function ListingsPage() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link href="/profile">My Profile</Link>
+                  <button className="cursor-pointer">
+                    <Link href="/profile">My Profile</Link>
+                  </button>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })} className="cursor-pointer">Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          ) : null}
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link href="/login"><Button variant="outline">Login</Button></Link>
+              <Link href="/signup"><Button className="bg-[#A60000] text-white">Sign Up</Button></Link>
+            </div>
+          )}
         </nav>
       </header>
 

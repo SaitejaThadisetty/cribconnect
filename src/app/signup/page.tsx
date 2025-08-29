@@ -20,7 +20,7 @@ export default function SignupPage() {
       body: JSON.stringify({ name, email, password })
     });
     if (res.ok) {
-      router.push("/login");
+      router.push("/");
     } else {
       alert("Signup failed");
     }
@@ -58,7 +58,7 @@ export default function SignupPage() {
             <span className="px-2 bg-white text-gray-500">Or continue with</span>
           </div>
         </div>
-        <Button variant="outline" className="w-full cursor-pointer" type="button" onClick={() => signIn("google", { callbackUrl: "/listings" })}>Sign up with Google</Button>
+  <Button variant="outline" className="w-full cursor-pointer" type="button" onClick={() => signIn("google", { callbackUrl: "/" })}>Sign up with Google</Button>
 
         <div className="text-center pt-4 text-sm text-gray-600">
           Already have an account?{' '}
