@@ -4,14 +4,26 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Here you would handle authentication logic.
-    router.push("/listings"); // Redirect to dashboard or home
+    const form = e.currentTarget;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
+    const res = await fetch("/api/auth/callback/credentials", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ email, password })
+    });
+    if (res.ok) {
+      router.push("/listings");
+    } else {
+      alert("Invalid credentials");
+    }
   }
 
   return (
@@ -32,7 +44,7 @@ export default function LoginPage() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" required />
           </div>
-          <Button type="submit" className="w-full bg-[#A60000] text-white">Sign In</Button>
+          <Button type="submit" className="w-full cursor-pointer bg-[#A60000] text-white">Sign In</Button>
         </form>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -42,7 +54,7 @@ export default function LoginPage() {
             <span className="px-2 bg-white text-gray-500">Or continue with</span>
           </div>
         </div>
-        <Button variant="outline" className="w-full">Sign in with Google</Button>
+  <Button variant="outline" className="w-full cursor-pointer" type="button" onClick={() => signIn("google", { callbackUrl: "/listings" })}>Sign in with Google</Button>
       </div>
     </div>
   );

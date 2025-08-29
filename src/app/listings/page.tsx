@@ -1,22 +1,42 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar } from "@/components/ui/avatar";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function ListingsPage() {
+  const { data: session } = useSession();
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
-            UCM CribConnect
-          </h1>
-          <div className="flex items-center space-x-4">
-            <Button variant="outline">Login</Button>
-            <Button className="bg-[#A60000] text-white">Sign Up</Button>
-          </div>
+            <Link href="/" passHref>
+            <Button variant="ghost" className="p-0 h-auto hover:bg-transparent cursor-pointer">
+              <h1 className="text-2xl font-bold text-[#A60000] font-montserrat">
+              UCM CribConnect
+              </h1>
+            </Button>
+            </Link>
+          {session ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="outline-none border-none bg-transparent p-0 flex items-center cursor-pointer">
+                  <Avatar name={session.user?.name || session.user?.email || undefined} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href="/profile">My Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : null}
         </nav>
       </header>
 

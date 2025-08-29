@@ -1,9 +1,14 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useSession, signOut } from "next-auth/react";
+import { Avatar } from "@/components/ui/avatar";
 
 export default function ProfilePage() {
+  const { data: session } = useSession();
+  const user = session?.user;
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm sticky top-0 z-10">
@@ -12,7 +17,7 @@ export default function ProfilePage() {
             UCM CribConnect
           </h1>
           <div className="flex items-center space-x-4">
-            <Button variant="outline">Logout</Button>
+            <Button variant="outline" onClick={() => signOut({ callbackUrl: "/login" })}>Logout</Button>
           </div>
         </nav>
       </header>
@@ -23,9 +28,12 @@ export default function ProfilePage() {
           <div className="lg:col-span-1">
             <Card>
               <CardContent className="p-6 text-center">
-                <div className="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-4"></div>
-                <h2 className="text-2xl font-bold font-montserrat">John Doe</h2>
-                <p className="text-gray-600">Computer Science, 2025</p>
+                <div className="w-32 h-32 mx-auto mb-4">
+                  <Avatar name={user?.name || user?.email || undefined} />
+                </div>
+                <h2 className="text-2xl font-bold font-montserrat">{user?.name || "No Name"}</h2>
+                <p className="text-gray-600">{user?.email}</p>
+                {/* Add department, grad year, etc. here if available in user */}
                 <Button variant="outline" className="mt-4 w-full">Edit Profile</Button>
               </CardContent>
             </Card>
@@ -63,7 +71,7 @@ export default function ProfilePage() {
                     <div className="space-y-4">
                       <div>
                         <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" defaultValue="john.doe@ucmo.edu" />
+                        <Input id="email" type="email" defaultValue={user?.email || ""} />
                       </div>
                       <div>
                         <Label htmlFor="password">Password</Label>
