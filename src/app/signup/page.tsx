@@ -1,8 +1,18 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Here you would handle signup logic.
+    router.push("/login"); // Redirect to login after signup
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
@@ -12,7 +22,7 @@ export default function SignupPage() {
           </h1>
           <p className="text-gray-500">Create an account to get started.</p>
         </div>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <Label htmlFor="name">Name</Label>
             <Input id="name" type="text" placeholder="Your Name" required />

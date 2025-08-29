@@ -1,8 +1,19 @@
+
+"use client";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
+  const router = useRouter();
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // Here you would handle authentication logic.
+    router.push("/listings"); // Redirect to dashboard or home
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
@@ -12,7 +23,7 @@ export default function LoginPage() {
           </h1>
           <p className="text-gray-500">Welcome back! Please sign in to your account.</p>
         </div>
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <Label htmlFor="email">Email</Label>
             <Input id="email" type="email" placeholder="name@ucmo.edu" required />

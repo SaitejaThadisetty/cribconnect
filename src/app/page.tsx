@@ -1,4 +1,6 @@
+
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,13 +14,17 @@ export default function Home() {
             UCM CribConnect
           </h1>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-600 hover:text-[#A60000]">Listings</a>
-            <a href="#" className="text-gray-600 hover:text-[#A60000]">Roommates</a>
-            <a href="#" className="text-gray-600 hover:text-[#A60000]">About</a>
+            <Link href="/listings" className="text-gray-600 hover:text-[#A60000]">Listings</Link>
+            <Link href="/roommates" className="text-gray-600 hover:text-[#A60000]">Roommates</Link>
+            <Link href="/about" className="text-gray-600 hover:text-[#A60000]">About</Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline">Login</Button>
-            <Button className="bg-[#A60000] text-white">Sign Up</Button>
+            <Button asChild variant="outline">
+              <Link href="/login">Login</Link>
+            </Button>
+            <Button asChild className="bg-[#A60000] text-white">
+              <Link href="/signup">Sign Up</Link>
+            </Button>
           </div>
         </nav>
       </header>
@@ -32,8 +38,12 @@ export default function Home() {
             <h2 className="text-5xl font-bold font-montserrat mb-4">Find Your Home at UCM</h2>
             <div className="mt-6 max-w-2xl mx-auto">
               <div className="bg-white p-4 rounded-t-lg flex space-x-2">
-                <Button className="bg-[#A60000] text-white flex-1">Find a Room</Button>
-                <Button variant="outline" className="flex-1">Find a Roommate</Button>
+                <Button asChild className="bg-[#A60000] text-white flex-1">
+                  <Link href="/listings">Find a Room</Link>
+                </Button>
+                <Button asChild variant="outline" className="flex-1">
+                  <Link href="/roommates">Find a Roommate</Link>
+                </Button>
               </div>
               <div className="bg-white p-4 rounded-b-lg">
                 <Input
@@ -87,7 +97,9 @@ export default function Home() {
           <div className="container mx-auto px-4 text-center">
             <h3 className="text-3xl font-bold font-montserrat">Ready to Find Your Place?</h3>
             <p className="mt-4 mb-8">Sign up now to post a listing or create your roommate profile.</p>
-            <Button variant="secondary" size="lg">Get Started</Button>
+            <Button asChild variant="secondary" size="lg">
+              <Link href="/signup">Get Started</Link>
+            </Button>
           </div>
         </section>
       </main>
