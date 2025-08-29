@@ -48,8 +48,8 @@ export default function Home() {
             </DropdownMenu>
           ) : (
             <div className="flex items-center space-x-4">
-              <Link href="/login"><Button variant="outline">Login</Button></Link>
-              <Link href="/signup"><Button className="bg-[#A60000] text-white">Sign Up</Button></Link>
+              <Link href="/login"><Button variant="outline" className="cursor-pointer">Login</Button></Link>
+              <Link href="/signup"><Button className="bg-[#A60000] text-white cursor-pointer">Sign Up</Button></Link>
             </div>
           )}
         </nav>
