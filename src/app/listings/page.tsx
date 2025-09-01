@@ -11,7 +11,6 @@ import Link from "next/link";
 
 export default function ListingsPage() {
   const { data: session } = useSession();
-  // No redirect logic here; redirect should be handled in login/signup pages
   return (
     <div className="flex flex-col min-h-screen">
       <header className="bg-white shadow-sm sticky top-0 z-10">
